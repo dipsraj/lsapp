@@ -149,7 +149,8 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-        if($request->hasFile('cover_image')){
+        if ($request->hasFile('cover_image')) {
+            Storage::delete('public/cover_images/' . $post->cover_image);
             $post->cover_image = $fileNameToStore;
         }
         $post->save();
